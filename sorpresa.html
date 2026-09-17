@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para Ti ❤️</title>
+  <link rel="stylesheet" href="css/sorpresa.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Instrucción sobre el sobre -->
+  <p class="instruccion">Toca la carta para abrirla ✨</p>
+
+  
+  <!-- Contenedor de la carta interactiva -->
+  <div class="envelope-wrapper" onclick="abrirCarta()">
+    <div class="envelope">
+      <!-- Solapa superior del sobre -->
+      <div class="flap"></div>
+      
+      <!-- Estampado / Sello de cera en el centro -->
+      <div class="wax-seal">❤️</div>
+      
+      <!-- Hoja/Carta con el texto personalizado -->
+      <div class="letter">
+        <div class="icono-corazon">🌻💛</div>
+        <h1 class="titulo-declaracion">Hay algo que quiero decirte...</h1>
+        
+        <p class="texto-declaracion">
+          Así como estas flores iluminan este espacio, tú iluminas cada uno de mis días. 
+          Tu sonrisa se ha convertido en mi momento favorito y tu presencia en mi lugar seguro.
+        </p>
+
+        <div class="pregunta-final">
+          ¿Me darías la oportunidad de caminar a tu lado y hacerte feliz cada día? ✨
+        </div>
+      </div>
+      
+      <!-- Frente y lados del sobre -->
+      <div class="pocket"></div>
+    </div>
+  </div>
+
+  <script>
+    function abrirCarta() {
+      const wrapper = document.querySelector('.envelope-wrapper');
+      const instruccion = document.querySelector('.instruccion');
+      wrapper.classList.toggle('open');
+      if (wrapper.classList.contains('open')) {
+        instruccion.style.opacity = '0';
+      } else {
+        instruccion.style.opacity = '1';
+      }
+    }
+  </script>
+</body>
+</html>

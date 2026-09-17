@@ -1,0 +1,197 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle, #1a1a2e 0%, #0f0f1a 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  overflow-x: hidden;
+  padding: 20px;
+}
+
+.instruccion {
+  font-size: 1.1rem;
+  color: #ffd700;
+  margin-bottom: 25px;
+  animation: pulse 1.5s infinite;
+  transition: opacity 0.5s ease;
+}
+
+/* Envoltorio del Sobre */
+.envelope-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.envelope {
+  position: relative;
+  width: 320px;
+  height: 220px;
+  background: #c0392b; /* Color base del sobre */
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 215, 0, 0.25);
+  transition: transform 0.4s ease;
+}
+
+.envelope-wrapper:hover .envelope {
+  transform: translateY(-5px);
+}
+
+/* Solapa superior */
+.envelope .flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 160px solid transparent;
+  border-right: 160px solid transparent;
+  border-top: 125px solid #e74c3c;
+  transform-origin: top;
+  transition: transform 0.6s ease 0.4s, z-index 0.2s ease 0.4s;
+  z-index: 3;
+}
+
+/* Sello / Estampado de Cera Dorado en el centro */
+.wax-seal {
+  position: absolute;
+  top: 110px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  background: radial-gradient(circle, #ffe066 0%, #d4af37 60%, #996515 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  z-index: 4;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4), inset 0 0 5px rgba(255, 255, 255, 0.6);
+  border: 2px solid #b8860b;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Bolsillo / Frente del sobre */
+.envelope .pocket {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 160px solid #d63031;
+  border-right: 160px solid #d63031;
+  border-bottom: 115px solid #e74c3c;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  z-index: 3;
+}
+
+/* Hoja con el mensaje dentro (Oculta completamente antes de abrir) */
+.envelope .letter {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  width: 290px;
+  height: 90px;
+  background: #fffdf0;
+  border-radius: 8px;
+  padding: 20px 15px;
+  color: #2c3e50;
+  text-align: center;
+  transition: transform 0.6s ease 0.2s, height 0.6s ease 0.6s, bottom 0.6s ease 0.6s, z-index 0.1s ease 0.5s;
+  z-index: 2;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  opacity: 0;
+}
+
+.icono-corazon {
+  font-size: 2rem;
+  margin-bottom: 5px;
+}
+
+.titulo-declaracion {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.8rem;
+  color: #d4ac0d;
+  margin-bottom: 10px;
+}
+
+.texto-declaracion {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #4a4a4a;
+  margin-bottom: 12px;
+}
+
+.pregunta-final {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #b7950b;
+  border-top: 1px dashed rgba(212, 172, 13, 0.5);
+  padding-top: 10px;
+}
+
+/* --- Animación al abrir la carta --- */
+.envelope-wrapper.open .flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+  transition: transform 0.5s ease, z-index 0.2s ease 0.3s;
+}
+
+.envelope-wrapper.open .wax-seal {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.3);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.envelope-wrapper.open .letter {
+  transform: translateY(-110px);
+  height: 380px;
+  opacity: 1;
+  z-index: 5;
+  overflow-y: auto;
+  transition: transform 0.6s ease 0.4s, height 0.6s ease 0.7s, opacity 0.4s ease 0.4s, z-index 0.1s ease 0.5s;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  .envelope {
+    width: 290px;
+    height: 200px;
+  }
+  .envelope .flap {
+    border-left-width: 145px;
+    border-right-width: 145px;
+    border-top-width: 115px;
+  }
+  .envelope .pocket {
+    border-left-width: 145px;
+    border-right-width: 145px;
+    border-bottom-width: 105px;
+  }
+  .envelope .letter {
+    width: 260px;
+    left: 15px;
+  }
+  .wax-seal {
+    top: 100px;
+    width: 42px;
+    height: 42px;
+    font-size: 1.3rem;
+  }
+}
