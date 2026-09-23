@@ -5,11 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Para Ti ❤️</title>
   <link rel="stylesheet" href="css/sorpresa.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <!-- Librería para lanzar confeti al aceptar -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
-<!-- Partículas mágicas flotando en el fondo -->
+  <!-- Partículas mágicas de fondo -->
   <div class="background-particles">
     <div class="particle"></div>
     <div class="particle"></div>
@@ -21,35 +23,40 @@
     <div class="particle"></div>
   </div>
 
+ 
   <!-- Instrucción sobre el sobre -->
   <p class="instruccion">Toca la carta para abrirla ✨</p>
 
-  
-  <!-- Contenedor de la carta interactiva -->
+  <!-- Contenedor del sobre interactivo -->
   <div class="envelope-wrapper" onclick="abrirCarta()">
     <div class="envelope">
       <!-- Solapa superior del sobre -->
       <div class="flap"></div>
       
-      <!-- Estampado / Sello de cera en el centro -->
-      <div class="wax-seal">❤️</div>
+      <!-- Sello de cera en el centro -->
+      <div class="wax-seal">🌻</div>
       
-      <!-- Hoja/Carta con el texto personalizado -->
+      <!-- Hoja/Carta con tu mensaje personalizado -->
       <div class="letter">
-        <div class="icono-corazon">🌻💛</div>
+        <div class="icono-corazon">🌻 💛</div>
         <h1 class="titulo-declaracion">Hay algo que quiero decirte...</h1>
         
         <p class="texto-declaracion">
-          Así como estas flores iluminan este espacio, tú iluminas cada uno de mis días. 
-          Tu sonrisa se ha convertido en mi momento favorito y tu presencia en mi lugar seguro.
+          En este poco tiempo conociéndote, tu sonrisa se ha vuelto una de las cosas que más disfruto de mis días. Me encanta compartir tiempo contigo y la buena energía que transmites.
         </p>
 
         <div class="pregunta-final">
-          ¿Me darías la oportunidad de caminar a tu lado y hacerte feliz cada día? ✨
+          ¿Te gustaría que sigamos conociéndonos y salgamos a tomar algo / dar un paseo este fin de semana? ✨
+          
+          <!-- Botones interactivos de respuesta -->
+          <div class="opciones-respuesta">
+            <button class="btn-respuesta btn-si" onclick="responderSi(event)">¡Sí, me encantaría! 💛</button>
+            <button class="btn-respuesta btn-no" onclick="responderNo(event)">Déjame pensarlo 🙈</button>
+          </div>
         </div>
       </div>
       
-      <!-- Frente y lados del sobre -->
+      <!-- Frente del sobre -->
       <div class="pocket"></div>
     </div>
   </div>
@@ -59,11 +66,37 @@
       const wrapper = document.querySelector('.envelope-wrapper');
       const instruccion = document.querySelector('.instruccion');
       wrapper.classList.toggle('open');
+      
       if (wrapper.classList.contains('open')) {
         instruccion.style.opacity = '0';
       } else {
         instruccion.style.opacity = '1';
       }
+    }
+
+    function responderSi(e) {
+      e.stopPropagation(); // Evita que la carta se cierre al hacer clic
+      lanzarConfeti();
+      setTimeout(() => {
+        alert("¡Súper! Me alegra mucho, ya organizamos para este fin de semana 😊🌻");
+      }, 300);
+    }
+
+    function responderNo(e) {
+      e.stopPropagation();
+      const btnNo = e.target;
+      btnNo.style.position = 'relative';
+      btnNo.style.top = (Math.random() * 80 - 90) + 'px';
+      btnNo.style.left = (Math.random() * 90 - 80) + 'px';
+    }
+
+    function lanzarConfeti() {
+      confetti({
+        particleCount: 120,
+        spread: 80,
+        origin: { y: 0.6 },
+        colors: ['#ffd700', '#ffb700', '#ffffff', '#e74c3c']
+      });
     }
   </script>
 </body>
